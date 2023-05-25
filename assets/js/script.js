@@ -21,7 +21,7 @@ var question0Array = [
     "An array of characters",
     "A fundamental component of subatomic particles",
   ],
-  [false, false, true, false],
+  [false, true, false, false],
 ];
 
 var question1Array = [
@@ -38,7 +38,9 @@ function timerStart() {
   secondsLeft.text(sec);
   var timer = setInterval(function () {
     sec--;
-    secondsLeft.text(sec);
+    if (sec >= 0) {
+      secondsLeft.text(sec);
+    }
     if (sec < 0) {
       clearInterval(timer);
     }
@@ -58,6 +60,11 @@ function startUp() {
 
 answerButtonHolder.on("click", ".answer-button", function (event) {
   console.log($(event.target).attr("data-button-num"));
+  if (questionNum > -1) {
+    console.log(
+      questionsArray[questionNum][2][$(event.target).attr("data-button-num")]
+    );
+  }
   if (questionNum == -1) {
     questionNum++;
     timerStart();
@@ -69,7 +76,12 @@ answerButtonHolder.on("click", ".answer-button", function (event) {
       false
     ) {
       sec -= 10; //I need to fix this so that it goes to 0 rather than going negative if there are less than 10 seconds left
-      secondsLeft.text(sec);
+      if (sec > 0) {
+        secondsLeft.text(sec);
+      } else {
+        sec = 0;
+        secondsLeft.text(sec);
+      }
     }
   }
 });
