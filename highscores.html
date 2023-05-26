@@ -34,14 +34,18 @@
               Please enter your name to log your score!
             </div>
           </div>
-          <button type="submit" class="btn btn-primary" id="name-submit-button">
+          <button
+            type="submit"
+            class="btn btn-primary col-12"
+            id="name-submit-button"
+          >
             Submit
           </button>
         </form>
       </div>
     </section>
     <div class="d-flex justify-content-center">
-      <div class="score-table-container col-8">
+      <div class="d-flex row score-table-container col-8">
         <table class="table text-light">
           <thead>
             <tr>
@@ -50,23 +54,16 @@
               <th scope="col">Score</th>
             </tr>
           </thead>
-          <tbody id="score-list-container">
-            <!-- <tr>
-              <th scope="">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td class="">Jacob</td>
-              <td>Thornton</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td colspan="2">Larry the Bird</td>
-            </tr> -->
-          </tbody>
+          <tbody id="score-list-container"></tbody>
         </table>
+        <a
+          type="Go Back"
+          href="./index.html"
+          class="btn btn-primary"
+          id="back-button"
+        >
+          Back
+        </a>
       </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>

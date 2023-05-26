@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <link rel="stylesheet" href="./assets/css/style.css" /> -->
     <!-- bootstrap to be used for layout -->
     <link
       rel="stylesheet"
@@ -20,7 +19,7 @@
       <div class="d-flex align-items-center">
         <h1>Welcome to the Great Coding Quiz!</h1>
 
-        <div class="ms-auto">
+        <div class="ms-auto" id="timer-container">
           <h3>Timer:</h3>
           <h3 id="seconds-left">0</h3>
         </div>
@@ -36,7 +35,9 @@
           brave enough to test your knowledge against others, knowing that your
           results will be saved for all to see? Or will you take the coward's
           way out, and turn away from the challenge? Click start below to test
-          your knowledge, and steel yourself for a grueling ordeal.
+          your knowledge, and steel yourself for a grueling ordeal. Every wrong
+          answer subtracts 10 seconds from your time, and the clock is ticking
+          down. Good luck!
         </p>
       </div>
       <section
