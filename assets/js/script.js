@@ -143,9 +143,32 @@ function endQuiz() {
 }
 
 function scorePageStartup() {
-  // console.log("We're on the high score page now");
-  // console.log(localStorage.getItem("playerScore"));
+  initHighScoreTable();
+}
+
+function initHighScoreTable() {
+  $("#score-list-container").empty();
   $("#score-display-span").text(localStorage.getItem("playerScore"));
+  var storedHighScoreList = JSON.parse(
+    localStorage.getItem("storedHighScoreList")
+  );
+  if (storedHighScoreList != null) {
+    var numOfEntries = storedHighScoreList.length;
+    for (let i = 0; i < numOfEntries; i++) {
+      console.log("num of entries " + numOfEntries);
+      var scoreEntry = $("<tr>");
+      var scoreNum = $("<td>");
+      var scoreName = $("<td>");
+      var scoreVal = $("<td>");
+      scoreNum.text(i + 1);
+      scoreName.text(storedHighScoreList[i].name);
+      scoreVal.text(storedHighScoreList[i].score);
+      scoreEntry.append(scoreNum);
+      scoreEntry.append(scoreName);
+      scoreEntry.append(scoreVal);
+      $("#score-list-container").append(scoreEntry);
+    }
+  }
 }
 
 $("#name-submit-button").on("click", function (event) {
@@ -154,33 +177,35 @@ $("#name-submit-button").on("click", function (event) {
 });
 
 function submitNameShowScore() {
-  var storedHighScoreListObj = JSON.parse(
-    localStorage.getItem("storedHighScoreListObj")
+  var storedHighScoreList = JSON.parse(
+    localStorage.getItem("storedHighScoreList")
   );
   var playerScoreObj = {
     name: $("#name-input-box").val(),
     score: localStorage.getItem("playerScore"),
   };
   console.log("submit clicked");
-  console.log(localStorage.getItem(storedHighScoreListObj));
+  console.log(localStorage.getItem(storedHighScoreList));
 
-  if (storedHighScoreListObj == null) {
+  if (storedHighScoreList == null) {
     console.log("if part");
-    storedHighScoreListObj = [playerScoreObj];
-    localStorage.setItem(
-      "storedHighScoreListObj",
-      JSON.stringify(storedHighScoreListObj)
-    );
+    storedHighScoreList = [playerScoreObj];
   } else {
     console.log("player score: " + playerScore);
-    storedHighScoreListObj.push(playerScoreObj);
-    console.log(storedHighScoreListObj);
-    localStorage.setItem(
-      "storedHighScoreListObj",
-      JSON.stringify(storedHighScoreListObj)
-    );
+    storedHighScoreList.push(playerScoreObj);
+    console.log(storedHighScoreList);
   }
+
+  //This is the sort method built into arrays. It works by taking each element of an array , and sorting them based on the comparison function. The function takes 2 elements of the array as inputs a and b, and if the function returns a positive number, 'a' is placed before 'b'. If it returns a negative number, 'b' is placed before 'a'. If it returns 0, the order of the 2 elements is unchanged. In this way, if the score of someone is higher, they are placed closer to the top
+  storedHighScoreList = storedHighScoreList.sort(function (a, b) {
+    return b.score - a.score;
+  });
+  localStorage.setItem(
+    "storedHighScoreList",
+    JSON.stringify(storedHighScoreList)
+  );
   $("#name-entry-container").empty();
+  initHighScoreTable();
 }
 
 startUp();
